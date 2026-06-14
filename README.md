@@ -32,19 +32,19 @@ You would also need to know how TypeScript works. You may need to know OOP (most
 In order to install the project, fork it then follow these instructions :
 
 ```bash
-git clone https://github.com/<your-username>/cleancode-js-devoir
+git clone https://github.com/<your-username>/cleancode-course-controle-1-<school>-<year>
 
-cd cleancode-js-devoir
+cd cleancode-course-controle-1-<school>-<year>
 
 docker compose up -d --build
 
-docker compose exec cleancode-js-devoir npm i
+docker compose exec cleancode-course-controle npm i
 ```
 
 The application is accessible on the browser. Use this command to run it locally :
 
 ```bash
-docker compose exec cleancode-js-devoir npm run dev -- --host
+docker compose exec cleancode-course-controle npm run dev -- --host
 ```
 
 It should be accessible at the address `http://127.0.0.1:5173`.

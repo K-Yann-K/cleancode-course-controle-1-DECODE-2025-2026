@@ -1,10 +1,10 @@
 services:
-  cleancode-js-devoir:
+  cleancode-course-controle:
     image: node:20
-    container_name: cleancode-js-devoir
+    container_name: cleancode-course-controle
     volumes:
-      - ./:/home/cleancode-js-devoir
-    working_dir: /home/cleancode-js-devoir
+      - ./:/home/cleancode-course-controle
+    working_dir: /home/cleancode-course-controle
     ports:
       - 5173:5173
       - 4173:4173
