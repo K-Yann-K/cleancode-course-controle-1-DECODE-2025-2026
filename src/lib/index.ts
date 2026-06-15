@@ -63,30 +63,31 @@ export function newRound(hasInit: boolean) {
         };
 }
 
-function calculateWeaponDamage(weapon: Weapon): number {
-    switch (weapon.name) {
-        case 'hatchet':
-        case 'knife':
-        case 'spear':
-            return 1;
-        case 'sword':
-        case 'halberd': 
-            return 5;
-            
-        case 'bow':
-            return Math.floor(Math.random()* 5);
-        case 'crossbow':
-            return Math.floor(Math.random() * 5);
+const DammageValue = {
+    OneDamage: 1,
+    ThreeDamage: 3,
+    FiveDamage: 5,
+}
 
-        case 'darts':
-            return Math.floor(Math.random() * 3);
-    
-        case 'dagger':
-            return 3;
-        
-        default:
-            throw new Error('Invalid weapon');
+const weaponDamageStrategies: Record<string, () => number> = {
+    hatchet: () => DammageValue.OneDamage,
+    knife: () => DammageValue.OneDamage,
+    spear: () => DammageValue.OneDamage,
+    dagger: () => DammageValue.ThreeDamage,
+    sword: () => DammageValue.FiveDamage,
+    halberd: () => DammageValue.FiveDamage,
+    bow: ()=> Math.floor(Math.random() * 5),
+    crossbow: () => Math.floor(Math.random() * 5),
+    darts: () => Math.floor(Math.random() * 5)
+}
+
+function calculateWeaponDamage(weapon: Weapon): number {
+    const strategy = weaponDamageStrategies[weapon.name];
+
+    if (!strategy) {
+        throw new Error('Invalid weapon');
     }
+    return strategy();
 }
 
 function getRandomWeapon(): Weapon {
