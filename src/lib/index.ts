@@ -16,17 +16,32 @@ interface FightResult {
     playerLost: boolean;
 }
 
+interface RoundState {
+    currentWeapon: Weapon;
+    usedWeapons: Weapon[];
+    rerollsLeft: number;
+}
+
+let roundState: RoundState | null = null;
+
+const GameConfig = {
+    TwoReroll: 2,
+    TenHealth: 10,
+}
+
 export let weaponList: Weapon[] = [];
 
 export function init() {
     weaponList = weapons as Weapon[];
+    const Weapon = getRandomWeapon();
 
+    roundState = {currentWeapon: Weapon, usedWeapons: [Weapon], rerollsLeft: GameConfig.TwoReroll}
 
-    let playerMaxHealth = 10;
-    let playerCurrentHealth = 10;
-    let enemyMaxHealth = 10;
-    let enemyCurrentHealth = 10;
-    let playerWeapon = weaponList[Math.floor(Math.random() * weaponList.length)];
+    let playerMaxHealth = GameConfig.TenHealth;
+    let playerCurrentHealth = GameConfig.TenHealth;
+    let enemyMaxHealth = GameConfig.TenHealth;
+    let enemyCurrentHealth = GameConfig.TenHealth;
+    let playerWeapon = Weapon;
     let enemyWeapon = null;
     let hasInit = true;
     let hasRound = true;
@@ -54,9 +69,10 @@ export function newRound(hasInit: boolean) {
         throw new Error('Game not initialized');
     }
         weaponList = weapons as Weapon[];
-
+        const weapon = getRandomWeapon()
+        roundState = { currentWeapon: weapon, usedWeapons: [weapon], rerollsLeft: GameConfig.TwoReroll};
         return {
-            playerWeapon: weaponList[Math.floor(Math.random() * weaponList.length)],
+            playerWeapon: weapon,
             enemyWeapon: null,
             hasRound: true,
             hasFought: false
