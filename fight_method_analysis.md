@@ -35,3 +35,4 @@ Le code dispose de commentaire. Il faut que le code soit auto-descriptif avec de
 ### secondaire
 - if(playerHealth <= 0) plutôt playerHealth = Math.max(0, playerHealth);
 - la fonction init contient deux fois la même ligne weaponList = weapon;
+- simplifier le if/else de la fonction newRound
